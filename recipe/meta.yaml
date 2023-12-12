@@ -1,27 +1,28 @@
 {% set name = "utilsforecast" %}
-{% set version = "0.0.21" %}
+{% set version = "0.0.10" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/utilsforecast-{{ version }}.tar.gz
-  sha256: 3a67430243370de78dcb219a4d22000d2e5957c23d5d5f4193d865e7ef3d422a
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 08c01d57a7d221bb0dc34ed72279b6a97795de441adfbe11f4a84ad2ce635c72
 
 build:
-  noarch: python
-  script: {{ PYTHON }} -m pip install . -vv
   number: 0
+  skip: true  # [py<36]
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
 requirements:
   host:
-    - python >=3.8
+    - python
     - pip
+    - setuptools
+    - wheel
   run:
-    - python >=3.8
+    - python
     - numpy
-    - packaging
     - pandas >=1.1.1
 
 test:
@@ -37,8 +38,9 @@ about:
   summary: Forecasting utilities
   license: Apache-2.0
   license_file: LICENSE
+  license_family: APACHE
+  description: Forecasting utilities
+  dev_url: https://github.com/Nixtla/utilsforecast
+  doc_url: https://nixtlaverse.nixtla.io/utilsforecast/index.html
 
-extra:
-  recipe-maintainers:
-    - AzulGarza
-    - jmoralez
+
