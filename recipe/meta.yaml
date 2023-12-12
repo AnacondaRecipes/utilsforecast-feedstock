@@ -43,4 +43,7 @@ about:
   dev_url: https://github.com/Nixtla/utilsforecast
   doc_url: https://nixtlaverse.nixtla.io/utilsforecast/index.html
 
-
+extra:
+  recipe-maintainers:
+    - AzulGarza
+    - jmoralez
