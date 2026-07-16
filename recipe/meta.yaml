@@ -1,30 +1,34 @@
 {% set name = "utilsforecast" %}
-{% set version = "0.2.12" %}
+{% set version = "0.2.16" %}
 
 package:
-  name: {{ name|lower }}
+  name: {{ name }}
   version: {{ version }}
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 73f9dfd836a721a95c349f784bd75e18a4cb7c1469800e325414e22901e9775b
+  sha256: dca406231d002279562ae897dbcb9e419c2fc5bf48908be02834b3187ce5a52b
 
 build:
   number: 0
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
-  skip: true  # [py<39]
+  skip: true  # [py<310]
 
 requirements:
   host:
     - pip
     - python
     - wheel
-    - setuptools >=36.2
+    - setuptools >=61.0
   run:
     - python
     - numpy
     - packaging
-    - pandas >=1.1.1
+    - pandas <3.0.0
+    - narwhals >=2.0
+  run_constrained:
+    # polars
+    - polars <=1.31
 
 test:
   imports:
